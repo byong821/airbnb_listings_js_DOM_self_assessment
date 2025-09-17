@@ -5,21 +5,34 @@ function MainModule(listingsID = "#listings") {
   const listingsElement = document.querySelector(listingsID);
 
   function getListingCode(listing) {
-    return `<div class="col-4">
-  <div class="listing card">
+    const amenities = JSON.parse(listing.amenities).slice(0, 3).join(", ");
+    return `<div class="col-4 mb-4">
+  <div class="listing card h=100">
     <img
-      src="https://a0.muscache.com/pictures/b7c2a199-4c17-4ba6-b81d-751719d2dac6.jpg"
+      src="${listing.picture_url}"
       class="card-img-top"
-      alt="AirBNB Listing"
-    />
+      alt="${listing.name}"
+      onerror="this.style.display='none'">
     <div class="card-body">
-      <h2 class="card-title">${listing.name}</h2>
+      <h5 class="card-title">${listing.name}</h5>
       <div>${listing.price}</div>
-      <p class="card-text">
-        Some quick example text to build on the card title and make up
-        the bulk of the card's content.
-      </p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <p class="card-text">${listing.description.substring(0, 120)}...</p>
+      <div class="d-flex align-items-center mb-2">
+        <img src ="${listing.host_thumbnail_url}"
+        width="30" 
+        height="30" 
+        class= "rounded-circle me-2"
+        alt="${listing.host_name}"
+        onerror="this.src='https://via.placeholder.com/30x30?text=?'">
+        <small>Host: ${listing.host_name}</small>
+    </div>
+    <p><strong>Price:</strong> ${listing.price}/night</p>
+    <p><strong>Amenities:</strong> ${amenities}</p>
+    <p><strong>Room Type:</strong> ${listing.room_type}</p>
+    <p><strong>Bed Type:</strong> ${listing.bed_type}</p>
+    <p><strong>Minimum Nights:</strong> ${listing.minimum_nights}</p>
+    <p><strong>Number of Reviews:</strong> ${listing.number_of_reviews}</p>
+    <p><strong>Availability:</strong> ${listing.availability_365} days</p>
     </div>
   </div>
   <!-- /card -->
