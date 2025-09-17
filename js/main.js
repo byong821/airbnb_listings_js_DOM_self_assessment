@@ -1,7 +1,8 @@
 function MainModule(listingsID = "#listings") {
   const me = {};
-
-
+  // adding logic to track state for button to load next 50 cards
+  let allListings = [];
+  let currentIndex = 0;
   const listingsElement = document.querySelector(listingsID);
 
   function getListingCode(listing) {
@@ -57,12 +58,24 @@ function MainModule(listingsID = "#listings") {
 
   async function loadData() {
     const res = await fetch("./airbnb_sf_listings_500.json");
-    const listings = await res.json();
-
-
-    me.redraw(listings.slice(0, 50));
+    // changing logic to store every listing for new button functionality
+    allListings = await res.json();
+    me.showNext50();
   }
 
+  function showNext50() {
+    const nextListings = allListings.slice(currentIndex, currentIndex + 50);
+    listingsElement.innerHTML += nextListings.map(getListingCode).join("\n");
+    currentIndex += 50;
+    
+    if (currentIndex < allListings.length) {
+      listingsElement.innerHTML += `<div class="col-12 text-center mb-4">
+        <button class="btn btn-primary" onclick="main.showNext50()">Load Next 50</button>
+      </div>`;
+    }
+  }
+
+  me.showNext50 = showNext50;
   me.redraw = redraw;
   me.loadData = loadData;
 
