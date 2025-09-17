@@ -30,7 +30,8 @@ function MainModule(listingsID = "#listings") {
     <p><strong>Price:</strong> ${listing.price}/night</p>
     <p><strong>Amenities:</strong> ${amenities}</p>
     <p><strong>Room Type:</strong> ${listing.room_type}</p>
-    <p><strong>Bed Type:</strong> ${listing.bed_type}</p>
+    <p><strong>Bedrooms:</strong> ${listing.bedrooms}</p>
+    <p><strong>Bathrooms:</strong> ${listing.bathrooms}</p>
     <p><strong>Minimum Nights:</strong> ${listing.minimum_nights}</p>
     <p><strong>Number of Reviews:</strong> ${listing.number_of_reviews}</p>
     <p><strong>Availability:</strong> ${listing.availability_365} days</p>
